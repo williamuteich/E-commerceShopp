@@ -1,0 +1,47 @@
+.container{
+    background-color: var(--bgSoft);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    gap: 20px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.4s all;
+}
+
+.container:hover{
+    background-color: #2e374a;
+    transition: 0.2s all;
+}
+
+.text{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.titulo{
+
+}
+
+.quantidadeUser{
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.descricao{
+    font-size: 14px;
+    font-weight: 300;
+}
+
+
+/*Se a quantidade da semana atual for maior que semana passada, muda a cor para "positivo"*/
+.positivo{
+    color: lime;
+}
+
+
+/*Se a quantidade da semana atual for menor que a semana anterior. muda a cor para "negativo"*/
+.negativo{
+
+}

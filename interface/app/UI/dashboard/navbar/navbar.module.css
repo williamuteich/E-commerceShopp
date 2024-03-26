@@ -1,0 +1,41 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bgSoft);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.titulo{
+    color: var(--textSoft);
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.menuNavbar{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.pesquisa{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #2e374a;
+}
+
+.inputPesquisar{
+    background-color: transparent;
+    border: none;
+    color: var(--text);
+    outline: none; 
+}
+
+.icones{
+    display: flex;
+    gap: 20px;
+}

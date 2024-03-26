@@ -1,0 +1,75 @@
+.container{
+    padding: 20px;
+    background-color: var(--bgSoft);
+    border-radius: 10px;
+}
+
+.titulo{
+    color: var(--textSoft);
+}
+
+.tabela{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.containerPadrao{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.containerUsuario{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.containerUsuario img{
+    width: 40px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.containerPadrao span{
+    padding: 8px 0;
+}
+.content .estiloSpan span{
+    padding: 7px 5px;
+    border: none;
+    text-align: center;
+    border-radius: 10px;
+}
+
+/*Criar validações para cada tipo de Status*/
+.aprovado {
+    background-color: #add8e67e; /* verde claro */
+}
+
+.pendente {
+    background-color: #FFA6006B; /* laranja claro */
+}
+
+.cancelado {
+    background-color: #FF00005D; /* vermelho escuro */
+}
+
+.finalizado {
+    background-color: #46464688; /* azul transparente */
+}

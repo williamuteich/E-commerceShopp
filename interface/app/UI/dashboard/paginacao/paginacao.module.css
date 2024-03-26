@@ -1,0 +1,22 @@
+.container{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button{
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    transition: 0.4s all;
+}
+
+.button:hover{
+    background-color: #d1d1d1;;
+    transition: 0.2s all;
+}
+
+.button:disabled{
+    cursor: pointer;
+}

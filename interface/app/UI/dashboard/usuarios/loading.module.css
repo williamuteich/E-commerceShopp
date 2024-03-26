@@ -1,0 +1,26 @@
+.containerLoading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+}
+
+.title{
+    font-size: 24px;
+}
+
+.loadingObjeto{
+    background-color: transparent;
+    padding: 20px 20px;
+    border-radius: 50%;
+    border: 10px solid white;
+    animation: rotating 1s linear infinite;
+    border-top-color: #34d5dd;
+}
+
+@keyframes rotating {
+    to {
+        transform: rotate(1turn);
+    }
+}

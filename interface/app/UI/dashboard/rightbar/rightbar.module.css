@@ -1,0 +1,28 @@
+.container{
+  background-color: var(--bgSoft);
+  height: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.titulo{
+  font-weight: bold;
+  color: var(--textSoft);
+  font-size: 16px;
+}
+
+.containerRight{
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.containerTitulo{
+  text-align: start;
+  width: 100%;
+}

@@ -1,0 +1,24 @@
+/* Estilo para o elemento pai do container */
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 25%);
+    width: 100%;
+}
+
+/* Estilo para o container */
+.containerModal {
+    max-width: 900px;
+    max-height: 850px;
+    border-radius: 10px;
+    background-color: unset;
+    border: none;
+    padding: 0px;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #2e374a transparent;
+    box-shadow: -1px 5px 17px #000000a1;
+
+}

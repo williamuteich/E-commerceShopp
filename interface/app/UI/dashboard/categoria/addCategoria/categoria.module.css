@@ -1,0 +1,170 @@
+.container {
+    background-color: var(--bgSoft);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    min-width: 900px;
+}
+
+
+.titulo{
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.form select {
+    background-color: transparent;
+    color: var(--text);
+    border-radius: 5px;
+    border: 2px solid #2e374a;
+    font-size: 16px;
+    width: 100%;
+    padding: 15px;
+    appearance: none; /* Remove o estilo padrão do select */
+}
+
+.form select option {
+    background-color: var(--bgSoft);
+    color: white;
+}
+
+.campo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: row;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.inputWrapper {
+    position: relative;
+}
+
+.inputWrapper input,
+.inputWrapper select,
+.inputWrapper textarea {
+    padding: 15px;
+    background-color: transparent;
+    color: var(--text);
+    border-radius: 5px;
+    border: 2px solid #2e374a;
+    font-size: 16px;
+    width: 100%;
+}
+
+.inputWrapper label {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text);
+    font-size: 16px;
+    transition: top 0.3s, font-size 0.3s;
+}
+
+.textareaWrapper label {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text);
+    font-size: 16px;
+    transition: top 0.3s, font-size 0.3s;
+}
+
+/* Estilo do rótulo quando o input está em foco */
+.inputWrapper input:focus + label,
+.inputWrapper select:focus + label,
+.inputWrapper textarea:focus + label {
+    top: -1px; /* Move o rótulo para cima */
+    font-size: 12px; /* Reduz o tamanho do rótulo */
+    background-color: var(--bgSoft);
+    padding: 0 5px;
+    color: var(--accent); /* Cor do rótulo quando o input está em foco */
+    border-radius: 20px;
+}
+
+/* Estilo do rótulo quando o input não está em foco e não está vazio */
+.inputWrapper input:not(:focus):not(:placeholder-shown) + label,
+.inputWrapper select:not(:focus):not(:placeholder-shown) + label,
+.inputWrapper textarea:not(:focus):not(:placeholder-shown) + label {
+    top: -1px; /* Move o rótulo para cima */
+    font-size: 12px; /* Reduz o tamanho do rótulo */
+    background-color: var(--bgSoft);
+    padding: 0 5px;
+    border-radius: 20px;
+}
+
+/* Estilo do rótulo quando o input não está em foco e está vazio */
+.inputWrapper input:not(:focus):placeholder-shown + label,
+.inputWrapper select:not(:focus):placeholder-shown + label {
+    top: 50%; /* Mantém o rótulo no centro quando o input está vazio */
+    font-size: 14px; /* Restaura o tamanho do rótulo */
+}
+
+.inputWrapper textarea:not(:focus):placeholder-shown + label{
+    top: 10%;
+    font-size: 14px;
+}
+
+/* Estilizando inputs do tipo número para ocultar as setas */
+.inputWrapper input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+/* Estilizando rótulos quando o input está focado ou não está vazio */
+.inputWrapper input:focus + label,
+.inputWrapper input:not(:placeholder-shown) + label,
+.inputWrapper select:focus + label,
+.inputWrapper select:not(:placeholder-shown) + label,
+.inputWrapper textarea:focus + label,
+.inputWrapper textarea:not(:placeholder-shown) + label {
+    color: var(--accent); /* Cor quando focado ou não vazio */
+}
+
+
+.form button {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    color: var(--text);
+    cursor: pointer;
+    transition: 0.4s all;
+}
+
+.inputWrapper textarea::placeholder {
+    color: white; /* Define a cor do placeholder como branca */
+}
+
+.divButtons{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-bottom: 1px solid transparent;
+}
+
+.divButtons:hover {
+    border-bottom: 1px solid white;
+    transition: 0.2s all;
+}
+
+
+
+.contentButton{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 45px;
+}
+

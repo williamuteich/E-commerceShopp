@@ -1,0 +1,84 @@
+.container{
+   background-color: var(--bgSoft);
+   padding: 20px;
+   margin-top: 20px;
+   border-radius: 10px;
+}
+
+.top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.addButton{
+    padding: 10px;
+    background-color: #5d57c9;
+    color: var(--text);
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.avatar{
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.table{
+    width: 100%;
+}
+
+.table td{
+    padding: 10px;
+}
+
+.usuario{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.buttons{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.buttonUser{
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: var(--text);
+    cursor: pointer;
+    border: none;
+}
+
+.visualizar{
+    background-color:  #2e8b56a6;
+    transition: 0.4s all;
+}
+
+.excluir{
+    background-color:#cc2b2bd7;
+    transition: 0.4s all;
+}
+
+.visualizar:hover{
+    transition: 0.2s all;
+    background-color:  #2e8b565e;
+}
+
+.excluir:hover{
+    transition: 0.2s all;
+    background-color:#cc2b2ba1;
+}
+
+.estiloTable{
+    border-bottom: 1px solid #ffffff21;
+}
+
+.naoEncontrado{
+    font-size: 16px;
+    padding: 30px 15px;
+}
