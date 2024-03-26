@@ -29,7 +29,6 @@ public class CidadeService {
         return cidadeRepository.saveAndFlush(cidade);
     }
 
-    @SuppressWarnings("null")
     public void excluir(Long id){
         Cidade cidade = cidadeRepository.findById(id).get();
         cidadeRepository.delete(cidade);

@@ -30,7 +30,6 @@ public class CategoriaService {
         return categoriaRepository.saveAndFlush(categoria);
     }
 
-    @SuppressWarnings("null")
     public void excluir(Long id){
         Categoria categoria = categoriaRepository.findById(id).get();
         categoriaRepository.delete(categoria);

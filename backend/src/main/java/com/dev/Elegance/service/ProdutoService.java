@@ -31,7 +31,6 @@ public class ProdutoService {
         return produtoRepository.saveAndFlush(produto);
     }
 
-    @SuppressWarnings("null")
     public void excluir(Long id){
         Produto produto = produtoRepository.findById(id).get();
         produtoRepository.delete(produto);

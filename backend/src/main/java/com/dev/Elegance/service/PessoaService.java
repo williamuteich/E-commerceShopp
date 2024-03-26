@@ -31,7 +31,6 @@ public class PessoaService {
         return pessoaRepository.saveAndFlush(pessoa);
     }
 
-    @SuppressWarnings("null")
     public void excluir(Long id){
         Pessoa pessoa = pessoaRepository.findById(id).get();
         pessoaRepository.delete(pessoa);

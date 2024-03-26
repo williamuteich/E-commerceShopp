@@ -29,7 +29,6 @@ public class MarcaService {
         return marcaRepository.saveAndFlush(marca);
     }
 
-    @SuppressWarnings("null")
     public void excluir(Long id){
         Marca marca = marcaRepository.findById(id).get();
         marcaRepository.delete(marca);

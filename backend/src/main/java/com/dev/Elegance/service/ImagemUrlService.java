@@ -29,7 +29,6 @@ public class ImagemUrlService {
         return imagemUrlRepository.findAll();
     }
 
-    @SuppressWarnings("null")
     public ImagemUrl inserir(Long idProduto, MultipartFile file){
         // Busca o produto pelo ID fornecido
         Produto produto =  produtoRepository.findById(idProduto).get();
@@ -66,7 +65,6 @@ public class ImagemUrlService {
         return imagemUrlRepository.saveAndFlush(imagemUrl);
     }
 
-    @SuppressWarnings("null")
     public void excluir(Long id){
         ImagemUrl imagemUrl = imagemUrlRepository.findById(id).orElse(null);
             if (imagemUrl != null) {

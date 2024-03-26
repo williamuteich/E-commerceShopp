@@ -29,7 +29,6 @@ public class PermissaoService {
         return permissaoRepository.saveAndFlush(permissao);
     }
 
-    @SuppressWarnings("null")
     public void excluir(Long id){
         Permissao permissao = permissaoRepository.findById(id).get();
          permissaoRepository.delete(permissao);

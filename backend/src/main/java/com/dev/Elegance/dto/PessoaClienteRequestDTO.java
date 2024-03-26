@@ -18,7 +18,6 @@ public class PessoaClienteRequestDTO {
     private String cep;
     private Cidade cidade;
 
-    @SuppressWarnings("null")
     public Pessoa converter(PessoaClienteRequestDTO pessoaClienteRequestDTO){
         Pessoa pessoa = new Pessoa();
         BeanUtils.copyProperties(pessoaClienteRequestDTO, pessoa);
