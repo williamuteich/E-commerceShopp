@@ -1,6 +1,6 @@
 import React from "react";
 
-const TabelaUsuarios = ({ styles, conteudoPagina, formataData, openModalDelete, setDeleteModalOpen }) => {
+const TabelaUsuarios = ({ styles, conteudoPagina, formataData, openModalDelete, openModalEdit }) => {
   return (
     <table className={styles.table}>
       <thead>
@@ -46,15 +46,10 @@ const TabelaUsuarios = ({ styles, conteudoPagina, formataData, openModalDelete, 
             </td>
             <td className={styles.estiloTable}>
               <div className={styles.buttons}>
-                <button
-                  className={`${styles.buttonUser} ${styles.visualizar}`}
-                >
+                <button className={`${styles.buttonUser} ${styles.visualizar}`} onClick={() => openModalEdit(usuario)}>
                   Editar
                 </button>
-                <button
-                  className={`${styles.buttonUser} ${styles.excluir}`}
-                  onClick={() => openModalDelete(usuario.id)}
-                >
+                <button className={`${styles.buttonUser} ${styles.excluir}`} onClick={() => openModalDelete(usuario.id)}>
                   Excluir
                 </button>
               </div>

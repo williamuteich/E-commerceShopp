@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Modal from 'react-modal';
 import styles from './customModal.module.css'
 
-const CustomModal = ({ isOpen, toggleModal, children, closeModalDelete, onConfirm, userId }) => {
+const CustomModal = ({ isOpen, toggleModal, children }) => {
     useEffect(() => {
         Modal.setAppElement(document.getElementById("#root"));
     }, []);

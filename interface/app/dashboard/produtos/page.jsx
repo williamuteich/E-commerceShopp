@@ -16,6 +16,7 @@ const ProdutosPage = () => {
     const [produtos, setProdutos] = useState([]);
     const [search, setSearch] = useState('');
     const produtoService = new ProdutoService();
+    const [isLoading, setIsLoading] = useState(true);
 
     const formataData = (data) => {
         return format(new Date(data), 'dd/MM/yy  HH:mm');
@@ -28,10 +29,25 @@ const ProdutosPage = () => {
         ) 
 
     useEffect(() => {
-        produtoService.listarTodos()
-        .then(response => setProdutos(response.data))
-        .catch(error => console.error('Erro ao Encontrar todos os produtos', error));
+        fetchData();
     }, [modalIsOpen]);
+    
+    useEffect(() => {
+        if (!isLoading) {
+            console.log("Dados carregados, isLoading agora é false");
+        }
+    }, [isLoading]);
+
+    const fetchData = async () => {
+        setIsLoading(false);
+        try {
+            const response = await produtoService.listarTodos();
+            setProdutos(response.data); // Definir os produtos na lista
+            console.log("recebe>>>>>>>>>>>:", isLoading)
+        } catch (error) {
+            console.error('Erro ao encontrar todos os produtos', error);
+        }
+    };
 
     const toggleModal = () => {
         setModalIsOpen(!modalIsOpen);

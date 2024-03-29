@@ -8,7 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; 
 import CustomModal from "../../UI/dashboard/customModal/customModal";
 import AdicionarUsuarioPage from "./addUsuario/page";
-import { UsuarioService } from "../../../service/usuarioService";
+import { UsuarioService } from "../../../service/UsuarioService";
 import { PermissaoService } from "../../../service/PermissaoService";
 import { format } from "date-fns";
 import Loading from "../../UI/dashboard/loading/loading";
@@ -22,7 +22,7 @@ const UsuariosPage = () => {
   const [search, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(true)
   const [currentPage, seCurrentPage] = useState(1)
-  const [userIdToDelete, setUserIdToDelete] = useState(null)
+  const [userEditAndDelete, setuserEditAndDelete] = useState(null)
 
   const usuarioService = new UsuarioService();
   const permissaoService = new PermissaoService();
@@ -63,7 +63,6 @@ const UsuariosPage = () => {
   };
 
   const confirmUserDelete  = (userId) => {
-    //console.log("Recebeu aqui:", userId)
     try {
        permissaoService.deletar(userId);
       fetchData();
@@ -79,12 +78,20 @@ const UsuariosPage = () => {
   };
 
   const openModalDelete = (userId) => {
-    setUserIdToDelete(userId);
+    setuserEditAndDelete(userId);
     setDeleteModalOpen(true);
   };
 
+  const openModalEdit = (usuario) => {
+    console.log(usuario)
+    setuserEditAndDelete(usuario);
+    setModalIsOpen(true)
+
+  }
+
 
   const toggleModal = () => {
+    setuserEditAndDelete(false)
     setModalIsOpen(!modalIsOpen);
   };
 
@@ -114,14 +121,15 @@ const UsuariosPage = () => {
       {conteudoPagina && conteudoPagina.length > 0 && (
 
       //Lista todos os registro
-      <TabelaUsuarios
-        styles={styles}
-        conteudoPagina={conteudoPagina}
-        formataData={formataData}
-        openModalDelete={openModalDelete}
-        setDeleteModalOpen={setDeleteModalOpen} // Certifique-se de que está escrito corretamente
-        confirmUserDelete={confirmUserDelete} // Passa a função confirmUserDelete como prop
-      />
+<TabelaUsuarios
+  styles={styles}
+  conteudoPagina={conteudoPagina}
+  formataData={formataData}
+  openModalDelete={openModalDelete}
+  setDeleteModalOpen={setDeleteModalOpen}
+  confirmUserDelete={confirmUserDelete}
+  openModalEdit={(usuario) => openModalEdit(usuario)} // Alteração aqui
+/>
       )}
 
       {/* Paginação de registro/*/}
@@ -137,13 +145,13 @@ const UsuariosPage = () => {
               isOpen={deleteModalOpen}
               closeModalDelete={() => setDeleteModalOpen(false)}
               onConfirm={confirmUserDelete}
-              userId={userIdToDelete}
+              userId={userEditAndDelete}
           />
       </CustomModal>
 
       {/* Adiciona registro/*/}
-      <CustomModal isOpen={modalIsOpen} toggleModal={toggleModal}>
-        <AdicionarUsuarioPage onSubmit={handleAdd} onCloseModal={toggleModal} />
+      <CustomModal isOpen={modalIsOpen} toggleModal={toggleModal} openModalEdit={openModalEdit}>
+        <AdicionarUsuarioPage onSubmit={handleAdd} onCloseModal={toggleModal} usuario={userEditAndDelete}/>
       </CustomModal>
     </div>
   );

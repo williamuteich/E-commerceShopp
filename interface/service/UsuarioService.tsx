@@ -14,6 +14,10 @@ export class UsuarioService {
     return axiosInstance.post("/api/pessoa/", dadosUsuario);
   }
 
+  editarUsuario() {
+    return axiosInstance.put("/api/pessoa/");
+  }
+
   // Método para deletar um usuário específico
   deletar(usuarioId) {
     return axiosInstance.delete(`/api/pessoa/${usuarioId}`);
