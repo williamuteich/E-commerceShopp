@@ -36,7 +36,7 @@ const TabelaUsuarios = ({ styles, conteudoPagina, formataData, openModalDelete, 
             <td className={styles.estiloTable}>
               {formataData(usuario.dataCriacao)}
             </td>
-            <td className={styles.estiloTable}>Administrador</td>
+            <td className={styles.estiloTable}>{usuario.permissaoPessoas[0].permissao.nome}</td>
             <td className={styles.estiloTable}>
               {usuario.ativo && usuario.ativo === true ? (
                 <span>Ativo</span>

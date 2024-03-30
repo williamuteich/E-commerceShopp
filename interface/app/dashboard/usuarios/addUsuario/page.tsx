@@ -22,7 +22,6 @@ const AdicionarUsuarioPage = ({ onCloseModal, usuario  }) => {
         const recebeCep = cep.replace(/[.-]/g, '');
         try {
             const response = await cepService.buscarEnderecoCep(recebeCep);
-            console.log("Retorno do objeto: ",response)
 
             setFormData({
                 ...formData,
@@ -58,9 +57,9 @@ const AdicionarUsuarioPage = ({ onCloseModal, usuario  }) => {
             const senhaCaracteres = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(senha)
             const senhaMaiuscula = /[A-Z]/.test(senha)
             
-            const cpfExistente = await usuarioService.verificarCpfExistente(formData.cpf);
-            const verificaTelefone = await usuarioService.verificaTelefone(formData.telefone);
-            const verificaMail = await usuarioService.verificaMail(formData.email);
+            const cpfExistente = await usuarioService.verificarCpfExistente(formData.cpf, formData.id);
+            const verificaTelefone = await usuarioService.verificaTelefone(formData.telefone, formData.id);
+            const verificaMail = await usuarioService.verificaMail(formData.email, formData.id);
 
             if(senha && senha.length <= 7){
                 toast.error('Sua senha deve ser maior ou igual a 8 caracteres.')
@@ -101,8 +100,10 @@ const AdicionarUsuarioPage = ({ onCloseModal, usuario  }) => {
             
             // Envie apenas os campos preenchidos do formulário para o servidor usando o método novoUsuario
             const recebeCPF = formDataToSend.cpf.replace(/[.-]/g, '');
-            const response = await usuarioService.adicionarUsuario(formDataToSend);
-            
+            const response = await usuarioService.editarUsuario(formDataToSend);
+          
+            //const response = await usuarioService.adicionarUsuario(formDataToSend);
+           
             onCloseModal(); // Feche o modal após o envio bem-sucedido
             
         } catch (error) {
@@ -123,7 +124,6 @@ const AdicionarUsuarioPage = ({ onCloseModal, usuario  }) => {
                 setFormData={setFormData} // Certifique-se de incluir setFormData
                 searchCep={searchCep}
                 onCloseModal={onCloseModal}
-                permissoes={permissoes}
             />
         </div>
     );

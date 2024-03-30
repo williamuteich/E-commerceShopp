@@ -52,7 +52,7 @@ const UsuariosPage = () => {
       usuarioService
         .buscarTodos()
         .then((response) => {
-          setUsuarios(response.data);
+          setUsuarios(response.data); 
           setIsLoading(false); 
         })
         .catch((error) => {
@@ -68,6 +68,7 @@ const UsuariosPage = () => {
       fetchData();
       toast.success("Usuário excluído com sucesso");
       setDeleteModalOpen(false);
+      setIsLoading(isLoading);
     } catch (error) {
       console.error("Erro ao tentar deletar Usuário", error);
       toast.error("Erro ao excluir usuário", {
@@ -83,24 +84,15 @@ const UsuariosPage = () => {
   };
 
   const openModalEdit = (usuario) => {
-    console.log(usuario)
     setuserEditAndDelete(usuario);
     setModalIsOpen(true)
-
+    return true;
   }
 
 
-  const toggleModal = () => {
+  const toggleModal = (novousuario) => {
     setuserEditAndDelete(false)
     setModalIsOpen(!modalIsOpen);
-  };
-
-  const handleAdd = () => {
-    toggleModal();
-    toast.success("Adicionado com Sucesso", {
-      position: "top-left",
-      autoClose: 2000,
-    });
   };
 
   return (
@@ -121,15 +113,15 @@ const UsuariosPage = () => {
       {conteudoPagina && conteudoPagina.length > 0 && (
 
       //Lista todos os registro
-<TabelaUsuarios
-  styles={styles}
-  conteudoPagina={conteudoPagina}
-  formataData={formataData}
-  openModalDelete={openModalDelete}
-  setDeleteModalOpen={setDeleteModalOpen}
-  confirmUserDelete={confirmUserDelete}
-  openModalEdit={(usuario) => openModalEdit(usuario)} // Alteração aqui
-/>
+      <TabelaUsuarios
+        styles={styles}
+        conteudoPagina={conteudoPagina}
+        formataData={formataData}
+        openModalDelete={openModalDelete}
+        setDeleteModalOpen={setDeleteModalOpen}
+        confirmUserDelete={confirmUserDelete}
+        openModalEdit={(usuario) => openModalEdit(usuario)} // Alteração aqui
+      />
       )}
 
       {/* Paginação de registro/*/}
@@ -150,8 +142,8 @@ const UsuariosPage = () => {
       </CustomModal>
 
       {/* Adiciona registro/*/}
-      <CustomModal isOpen={modalIsOpen} toggleModal={toggleModal} openModalEdit={openModalEdit}>
-        <AdicionarUsuarioPage onSubmit={handleAdd} onCloseModal={toggleModal} usuario={userEditAndDelete}/>
+      <CustomModal isOpen={modalIsOpen} toggleModal={toggleModal} openModalEdit={openModalEdit} >
+        <AdicionarUsuarioPage  onCloseModal={toggleModal} usuario={userEditAndDelete} />
       </CustomModal>
     </div>
   );
