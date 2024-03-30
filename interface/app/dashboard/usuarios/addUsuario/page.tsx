@@ -1,18 +1,17 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import styles from '../../../UI/dashboard/usuarios/adicionaUsuario/adicionaUsuario.module.css';
 import { UsuarioService } from '../../../../service/UsuarioService';
 import { PermissaoService } from '../../../../service/PermissaoService';
 import { buscarCEP } from '../../../../service/apiCep'
 import { toast, ToastContainer } from 'react-toastify';
 import TabelaUsuarioAdicionar from '../../../UI/dashboard/usuarios/adicionaUsuario/tabelausuario';
         
-const AdicionarUsuarioPage = ({ onCloseModal, usuario  }) => {
+const AdicionarUsuarioPage = ({ onCloseModal, usuario, action }) => {
     const [permissoes, setPermissoes] = useState([]);
-    const [cargoSelecionado, setCargoSelecionado] = useState(usuario.cargoId);
+    const [cargoSelecionado, setCargoSelecionado] = useState('');
     const [formData, setFormData] = useState(usuario)
-    
+    console.log('Cargo ID do usuário:', cargoSelecionado);
 
     const usuarioService = new UsuarioService();
     const permissaoService = new PermissaoService();
@@ -22,7 +21,6 @@ const AdicionarUsuarioPage = ({ onCloseModal, usuario  }) => {
         const recebeCep = cep.replace(/[.-]/g, '');
         try {
             const response = await cepService.buscarEnderecoCep(recebeCep);
-            console.log("Retorno do objeto: ",response)
 
             setFormData({
                 ...formData,
@@ -41,14 +39,17 @@ const AdicionarUsuarioPage = ({ onCloseModal, usuario  }) => {
             try {
                 const response = await permissaoService.buscarTodas();
                 setPermissoes(response.data);
+                if (usuario && usuario.permissaoPessoas && usuario.permissaoPessoas.length > 0) {
+                    const permissaoUsuario = usuario.permissaoPessoas[0].permissao;
+                    setCargoSelecionado(permissaoUsuario.id); // Configura o estado com o ID da permissão
+                }
             } catch (error) {
                 console.error('Erro ao buscar permissões:', error);
             }
         };
 
         fetchPermissoes();
-    }, []);
-
+    }, [usuario]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -58,9 +59,9 @@ const AdicionarUsuarioPage = ({ onCloseModal, usuario  }) => {
             const senhaCaracteres = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(senha)
             const senhaMaiuscula = /[A-Z]/.test(senha)
             
-            const cpfExistente = await usuarioService.verificarCpfExistente(formData.cpf);
-            const verificaTelefone = await usuarioService.verificaTelefone(formData.telefone);
-            const verificaMail = await usuarioService.verificaMail(formData.email);
+            const cpfExistente = await usuarioService.verificarCpfExistente(formData.cpf, formData.id);
+            const verificaTelefone = await usuarioService.verificaTelefone(formData.telefone, formData.id);
+            const verificaMail = await usuarioService.verificaMail(formData.email, formData.id);
 
             if(senha && senha.length <= 7){
                 toast.error('Sua senha deve ser maior ou igual a 8 caracteres.')
@@ -98,16 +99,22 @@ const AdicionarUsuarioPage = ({ onCloseModal, usuario  }) => {
                     }
                 }],
             };
-            
-            // Envie apenas os campos preenchidos do formulário para o servidor usando o método novoUsuario
+            /// Envie apenas os campos preenchidos do formulário para o servidor usando o método novoUsuario
             const recebeCPF = formDataToSend.cpf.replace(/[.-]/g, '');
-            const response = await usuarioService.adicionarUsuario(formDataToSend);
-            
-            onCloseModal(); // Feche o modal após o envio bem-sucedido
+
+            //Vai verificar qual dos actions esta retonando TRUE.
+            if (action === true) {
+                // Edita usário
+                const response = await usuarioService.editarUsuario(formDataToSend);
+              } else {
+                /// Adicionar usuário
+                const response = await usuarioService.adicionarUsuario(formDataToSend);
+              }
+           
+            onCloseModal();
             
         } catch (error) {
             console.error('Erro ao enviar dados do formulário:', error);
-            // Lidere com o erro, se necessário
         }
     };
 
@@ -119,11 +126,10 @@ const AdicionarUsuarioPage = ({ onCloseModal, usuario  }) => {
                 formData={formData}
                 cargoSelecionado={cargoSelecionado} 
                 setCargoSelecionado={setCargoSelecionado} 
-                permissoes={permissoes}  // Certifique-se de incluir permissoes
-                setFormData={setFormData} // Certifique-se de incluir setFormData
+                permissoes={permissoes} 
+                setFormData={setFormData}
                 searchCep={searchCep}
                 onCloseModal={onCloseModal}
-                permissoes={permissoes}
             />
         </div>
     );

@@ -6,6 +6,7 @@ export const axiosInstance = axios.create({
 });
 
 export class UsuarioService {
+  //Metodo que busca todos os dados de usuário.
   buscarTodos() {
     return axiosInstance.get("/api/pessoa/");
   }
@@ -14,19 +15,21 @@ export class UsuarioService {
     return axiosInstance.post("/api/pessoa/", dadosUsuario);
   }
 
-  editarUsuario() {
-    return axiosInstance.put("/api/pessoa/");
+  //Metodo para editar usuário.
+  editarUsuario(usuario) {
+    return axiosInstance.put("/api/pessoa/", usuario);
   }
 
-  // Método para deletar um usuário específico
+  // Metodo para deletar um usuário específico
   deletar(usuarioId) {
     return axiosInstance.delete(`/api/pessoa/${usuarioId}`);
   }
 
-  async verificaTelefone(telefone) {
+  //Validação de telefone
+  async verificaTelefone(telefone, usuarioID) {
     try {
         const response = await axiosInstance.get(`api/pessoa/?telefone=${telefone}`);
-        const usuarioCel = response.data.filter(usuario => usuario.telefone === telefone);
+        const usuarioCel = response.data.filter(usuario => usuario.telefone === telefone && usuario.id !== usuarioID);
 
         if (usuarioCel.length > 0) {
             toast.error('Número de Telefone Já Cadastrado.');
@@ -40,12 +43,13 @@ export class UsuarioService {
     }
   }
 
-  async verificarCpfExistente(cpf){
+  //Validação para CPF
+  async verificarCpfExistente(cpf, usuarioID){
     try{
         const response = await axiosInstance.get(`/api/pessoa/?telefone=${cpf}`)
-        const usuarioCpf = response.data.filter(usuario => usuario.cpf === cpf);
+        const usuarioCpf = response.data.filter(usuario => usuario.cpf === cpf && usuario.id !== usuarioID);
     
-        if (usuarioCpf.length > 0){
+        if (usuarioCpf.length > 0 &&  usuarioCpf.length){
           toast.error('CPF já cadastrado. Por favor, verifique o CPF inserido.');
           return true;
         }
@@ -56,10 +60,11 @@ export class UsuarioService {
     }
   }
 
-  async verificaMail(email) {
+  //Validação para Número de Celular
+  async verificaMail(email, usuarioID) {
       try {
           const response = await axiosInstance.get(`/api/pessoa/?email=${email}`);
-          const usuarioMail = response.data.filter(usuario => usuario.email === email);
+          const usuarioMail = response.data.filter(usuario => usuario.email === email && usuario.id !== usuarioID);
 
           if (usuarioMail.length > 0) {
               toast.error('Email já cadastrado. Por favor, verifique o email inserido.');

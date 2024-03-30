@@ -36,7 +36,7 @@ const TabelaUsuarios = ({ styles, conteudoPagina, formataData, openModalDelete, 
             <td className={styles.estiloTable}>
               {formataData(usuario.dataCriacao)}
             </td>
-            <td className={styles.estiloTable}>Administrador</td>
+            <td className={styles.estiloTable}>{usuario.permissaoPessoas[0].permissao.nome}</td>
             <td className={styles.estiloTable}>
               {usuario.ativo && usuario.ativo === true ? (
                 <span>Ativo</span>
@@ -46,7 +46,7 @@ const TabelaUsuarios = ({ styles, conteudoPagina, formataData, openModalDelete, 
             </td>
             <td className={styles.estiloTable}>
               <div className={styles.buttons}>
-                <button className={`${styles.buttonUser} ${styles.visualizar}`} onClick={() => openModalEdit(usuario)}>
+                <button className={`${styles.buttonUser} ${styles.visualizar}`} onClick={() => openModalEdit(usuario, true)}>
                   Editar
                 </button>
                 <button className={`${styles.buttonUser} ${styles.excluir}`} onClick={() => openModalDelete(usuario.id)}>
