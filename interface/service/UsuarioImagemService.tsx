@@ -19,4 +19,8 @@ export class UsuarioImagemService {
 
         return axiosInstance.post(`/api/imagemUser/`, formData, config); // Passando formData como segundo argumento
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> aeaccb3a9e6a6fa1443a327d0c4262374e715fa4
