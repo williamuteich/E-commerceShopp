@@ -130,6 +130,7 @@ const AdicionarUsuarioPage = ({ onCloseModal, usuario, action }) => {
                 setFormData={setFormData}
                 searchCep={searchCep}
                 onCloseModal={onCloseModal}
+                usuario={usuario}
             />
         </div>
     );

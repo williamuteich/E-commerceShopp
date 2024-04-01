@@ -2,10 +2,11 @@ import styles from './adicionaUsuario.module.css';
 import { FaCheck } from "react-icons/fa";
 import { InputMask } from 'primereact/inputmask';
 import { useState } from 'react';
+import { UsuarioImagemService } from '../../../../../service/UsuarioImagemService';
 
-const TabelaUsuarioAdicionar = ({ handleSubmit, formData, cargoSelecionado, setCargoSelecionado, searchCep, setFormData, permissoes, onCloseModal }) => {
-
-    const [imagemUrl, setImagemUrl] = useState('/noavatar.png'); 
+const TabelaUsuarioAdicionar = ({ handleSubmit, formData, cargoSelecionado, setCargoSelecionado, searchCep, setFormData, permissoes, onCloseModal, usuario }) => {
+    const [imagemSelecionada, setImagemSelecionada] = useState(null)
+    const usuarioImagemService = new UsuarioImagemService();
 
     const handleFormEdit = (event, nome) => {
         setFormData({
@@ -14,22 +15,39 @@ const TabelaUsuarioAdicionar = ({ handleSubmit, formData, cargoSelecionado, setC
         });
     };
 
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const imageUrl = URL.createObjectURL(file); 
-            setImagemUrl(imageUrl); 
-        }
-    };
-
+    const uploadImagens = (event) => {
+        event.preventDefault();
+        usuarioImagemService.uploadImagem({
+            idPessoa: usuario.id,
+            file: event.target.files[0] 
+        }).then(response => {
+            alert('Imagem inserida com sucesso');
+            setImagemSelecionada(response.data); 
+        }).catch(error => {
+            console.error('Erro ao enviar imagem:', error);
+        });
+        event.target.value = ''; // Corrigido o clear do campo de upload
+    }
+    
+    const imgUsuario =  imagemSelecionada ? imagemSelecionada.imagemUser :  'noavatar.png'
+    console.log("aaaaaaaaaaaaaa", imgUsuario)
     return ( 
         <div className={styles.container} id="root">
-            <form action="/upload" method="POST" encType="multipart/form-data" className={styles.imagemUsuario}>
-                <img src={imagemUrl} width={200} height={200}/>
-                <label htmlFor="imagem" className={styles.customFileUpload}>Adicionar Foto</label>
-                <input type="file" id="imagem" name="imagem" accept="image/*" style={{ display: 'none' }} onChange={handleFileChange} />
-            </form>
             <form onSubmit={handleSubmit} className={styles.form}>
+                <div className={styles.imagemUsuario}>
+                    <img src={`/${imgUsuario}`} width={200} height={200} alt="Imagem do usuário" />
+                    <label htmlFor="imagem" className={styles.customFileUpload}>
+                        Adicionar Foto
+                        <input
+                            type="file"
+                            id="imagem"
+                            name="imagem"
+                            onChange={uploadImagens}
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                        />
+                    </label>
+                </div>
                 <h1>Dados do Usuário</h1>
                 <div className={styles.campo}>
                     <div className={styles.inputWrapper}>

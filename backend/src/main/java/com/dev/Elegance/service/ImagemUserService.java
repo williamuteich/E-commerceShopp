@@ -36,7 +36,7 @@ public class ImagemUserService {
             if (!file.isEmpty()) {
                 byte[] bytes = file.getBytes();
                 String nomeImagem = pessoa.getId() + "_" + file.getOriginalFilename();
-                Path caminho = Paths.get("C:/Ecommerce-Shop/E-commerceShopp/interface/imagens/" + nomeImagem);
+                Path caminho = Paths.get("C:/Ecommerce-Shop/E-commerceShopp/interface/public/" + nomeImagem);
                 Files.write(caminho, bytes);
                 objeto.setImagemUser(nomeImagem);
                 objeto.setPessoa(pessoa);
@@ -64,7 +64,7 @@ public class ImagemUserService {
         ImagemUser imagemUser = imagemUserRepository.findById(id).orElse(null);
         if (imagemUser != null) {
             try {
-                Path caminho = Paths.get("C:/imagens/" + imagemUser.getImagemUser());
+                Path caminho = Paths.get("C:/public/" + imagemUser.getImagemUser());
                 Files.deleteIfExists(caminho);
             } catch (IOException e) {
                 e.printStackTrace();
