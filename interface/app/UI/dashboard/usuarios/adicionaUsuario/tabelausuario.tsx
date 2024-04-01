@@ -1,8 +1,11 @@
 import styles from './adicionaUsuario.module.css';
 import { FaCheck } from "react-icons/fa";
 import { InputMask } from 'primereact/inputmask';
+import { useState } from 'react';
 
 const TabelaUsuarioAdicionar = ({ handleSubmit, formData, cargoSelecionado, setCargoSelecionado, searchCep, setFormData, permissoes, onCloseModal }) => {
+
+    const [imagemUrl, setImagemUrl] = useState('/noavatar.png'); 
 
     const handleFormEdit = (event, nome) => {
         setFormData({
@@ -10,12 +13,22 @@ const TabelaUsuarioAdicionar = ({ handleSubmit, formData, cargoSelecionado, setC
             [nome]: event.target.value
         });
     };
+
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const imageUrl = URL.createObjectURL(file); 
+            setImagemUrl(imageUrl); 
+        }
+    };
+
     return ( 
         <div className={styles.container} id="root">
-            <div className={styles.imagemUsuario}>
-                <img src='/noavatar.png' width={200} height={200}/>
-                <button><a href=''>Adicionar Foto</a></button>
-            </div>
+            <form action="/upload" method="POST" encType="multipart/form-data" className={styles.imagemUsuario}>
+                <img src={imagemUrl} width={200} height={200}/>
+                <label htmlFor="imagem" className={styles.customFileUpload}>Adicionar Foto</label>
+                <input type="file" id="imagem" name="imagem" accept="image/*" style={{ display: 'none' }} onChange={handleFileChange} />
+            </form>
             <form onSubmit={handleSubmit} className={styles.form}>
                 <h1>Dados do Usuário</h1>
                 <div className={styles.campo}>
@@ -40,23 +53,22 @@ const TabelaUsuarioAdicionar = ({ handleSubmit, formData, cargoSelecionado, setC
                         <label>Celular</label>
                     </div>
                     <div className={styles.inputWrapper}>
-                    <select
-                        name='cargo'
-                        id='cargo'
-                        value={cargoSelecionado}
-                        onChange={(e) => setCargoSelecionado(e.target.value)}
-                    >
-                        <option value="">Selecionar Cargo</option>
-                        {permissoes.map(permissao => (
-                            <option
-                                key={permissao.id}
-                                value={permissao.id}
-                            >
-                                {permissao.nome}
-                            </option>
-                        ))}
-                    </select>
-
+                        <select
+                            name='cargo'
+                            id='cargo'
+                            value={cargoSelecionado}
+                            onChange={(e) => setCargoSelecionado(e.target.value)}
+                        >
+                            <option value="">Selecionar Cargo</option>
+                            {permissoes.map(permissao => (
+                                <option
+                                    key={permissao.id}
+                                    value={permissao.id}
+                                >
+                                    {permissao.nome}
+                                </option>
+                            ))}
+                        </select>
                         <label>Cargo</label>
                     </div>
                     <div className={styles.inputWrapper}>

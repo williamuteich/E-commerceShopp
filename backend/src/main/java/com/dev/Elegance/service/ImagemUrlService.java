@@ -42,7 +42,7 @@ public class ImagemUrlService {
                 // Define o nome do arquivo, incluindo o ID do produto
                 String nomeImagem = produto.getId() + "_" + file.getOriginalFilename();
                 // Define o caminho onde o arquivo será salvo
-                Path caminho = Paths.get("C:/Users/William/Documents/Ecommerce/front-end/public/" + nomeImagem);
+                Path caminho = Paths.get("C:/Ecommerce-Shop/E-commerceShopp/interface/imagens" + nomeImagem);
                 // Escreve os bytes do arquivo no caminho especificado
                 Files.write(caminho, bytes);
                 // Define o nome da imagem no objeto ImagemUrl
