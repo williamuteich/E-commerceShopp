@@ -101,6 +101,7 @@ const AdicionarUsuarioPage = ({ onCloseModal, usuario, action }) => {
             };
             /// Envie apenas os campos preenchidos do formulário para o servidor usando o método novoUsuario
             const recebeCPF = formDataToSend.cpf.replace(/[.-]/g, '');
+<<<<<<< HEAD
 
             //Vai verificar qual dos actions esta retonando TRUE.
             if (action === true) {
@@ -112,6 +113,13 @@ const AdicionarUsuarioPage = ({ onCloseModal, usuario, action }) => {
               }
            
             onCloseModal();
+=======
+            const response = await usuarioService.editarUsuario(formDataToSend);
+          
+            //const response = await usuarioService.adicionarUsuario(formDataToSend);
+           
+            onCloseModal(); // Feche o modal após o envio bem-sucedido
+>>>>>>> 9d7c33545b38bc8a1bc5083fd5ba14a1d246ada6
             
         } catch (error) {
             console.error('Erro ao enviar dados do formulário:', error);
@@ -130,7 +138,10 @@ const AdicionarUsuarioPage = ({ onCloseModal, usuario, action }) => {
                 setFormData={setFormData}
                 searchCep={searchCep}
                 onCloseModal={onCloseModal}
+<<<<<<< HEAD
                 usuario={usuario}
+=======
+>>>>>>> 9d7c33545b38bc8a1bc5083fd5ba14a1d246ada6
             />
         </div>
     );

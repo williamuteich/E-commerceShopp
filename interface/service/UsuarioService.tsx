@@ -15,8 +15,13 @@ export class UsuarioService {
     return axiosInstance.post("/api/pessoa/", dadosUsuario);
   }
 
+<<<<<<< HEAD
   //Metodo para editar usuário.
   editarUsuario(usuario) {
+=======
+  editarUsuario(usuario) {
+    console.log("está recebendo dados no axios:", usuario)
+>>>>>>> 9d7c33545b38bc8a1bc5083fd5ba14a1d246ada6
     return axiosInstance.put("/api/pessoa/", usuario);
   }
 
@@ -25,7 +30,10 @@ export class UsuarioService {
     return axiosInstance.delete(`/api/pessoa/${usuarioId}`);
   }
 
+<<<<<<< HEAD
   //Validação de telefone
+=======
+>>>>>>> 9d7c33545b38bc8a1bc5083fd5ba14a1d246ada6
   async verificaTelefone(telefone, usuarioID) {
     try {
         const response = await axiosInstance.get(`api/pessoa/?telefone=${telefone}`);
@@ -43,8 +51,13 @@ export class UsuarioService {
     }
   }
 
+<<<<<<< HEAD
   //Validação para CPF
   async verificarCpfExistente(cpf, usuarioID){
+=======
+  async verificarCpfExistente(cpf, usuarioID){
+    //console.log('retorno CPF:', cpf + ' <br>retorno usuario ' + usuarioID);
+>>>>>>> 9d7c33545b38bc8a1bc5083fd5ba14a1d246ada6
     try{
         const response = await axiosInstance.get(`/api/pessoa/?telefone=${cpf}`)
         const usuarioCpf = response.data.filter(usuario => usuario.cpf === cpf && usuario.id !== usuarioID);
@@ -60,7 +73,10 @@ export class UsuarioService {
     }
   }
 
+<<<<<<< HEAD
   //Validação para Número de Celular
+=======
+>>>>>>> 9d7c33545b38bc8a1bc5083fd5ba14a1d246ada6
   async verificaMail(email, usuarioID) {
       try {
           const response = await axiosInstance.get(`/api/pessoa/?email=${email}`);

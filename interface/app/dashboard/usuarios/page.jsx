@@ -64,6 +64,7 @@ const UsuariosPage = () => {
 
   const confirmUserDelete = async (userId) => {
     try {
+<<<<<<< HEAD
       const response = await permissaoService.deletar(userId); 
       if (response.status === 200) {
         setDeleteModalOpen(false); 
@@ -76,6 +77,13 @@ const UsuariosPage = () => {
       } else {
         console.error("Erro ao tentar deletar Usuário:", response.statusText);
       }
+=======
+       permissaoService.deletar(userId);
+      fetchData();
+      toast.success("Usuário excluído com sucesso");
+      setDeleteModalOpen(false);
+      setIsLoading(isLoading);
+>>>>>>> 9d7c33545b38bc8a1bc5083fd5ba14a1d246ada6
     } catch (error) {
       console.error("Erro ao tentar deletar Usuário", error);
     }
@@ -86,6 +94,7 @@ const UsuariosPage = () => {
     setDeleteModalOpen(true);
   };
 
+<<<<<<< HEAD
   const openModalEdit = (usuario, action) => {
     setuserEditAndDelete(usuario);
     setModalIsOpen(true);
@@ -98,6 +107,20 @@ const UsuariosPage = () => {
     setModalIsOpen(!modalIsOpen);
   };
 
+=======
+  const openModalEdit = (usuario) => {
+    setuserEditAndDelete(usuario);
+    setModalIsOpen(true)
+    return true;
+  }
+
+
+  const toggleModal = (novousuario) => {
+    setuserEditAndDelete(false)
+    setModalIsOpen(!modalIsOpen);
+  };
+
+>>>>>>> 9d7c33545b38bc8a1bc5083fd5ba14a1d246ada6
   return (
     <div className={styles.container}>
       <ToastContainer />
@@ -121,7 +144,13 @@ const UsuariosPage = () => {
         conteudoPagina={conteudoPagina}
         formataData={formataData}
         openModalDelete={openModalDelete}
+<<<<<<< HEAD
         openModalEdit={(usuario, action) => openModalEdit(usuario, action)}
+=======
+        setDeleteModalOpen={setDeleteModalOpen}
+        confirmUserDelete={confirmUserDelete}
+        openModalEdit={(usuario) => openModalEdit(usuario)} // Alteração aqui
+>>>>>>> 9d7c33545b38bc8a1bc5083fd5ba14a1d246ada6
       />
       )}
 
@@ -143,8 +172,13 @@ const UsuariosPage = () => {
       </CustomModal>
 
       {/* Adiciona registro/*/}
+<<<<<<< HEAD
       <CustomModal isOpen={modalIsOpen} toggleModal={toggleModal} openModalEdit={openModalEdit}>
         <AdicionarUsuarioPage  onCloseModal={toggleModal} usuario={userEditAndDelete} action={action}/>
+=======
+      <CustomModal isOpen={modalIsOpen} toggleModal={toggleModal} openModalEdit={openModalEdit} >
+        <AdicionarUsuarioPage  onCloseModal={toggleModal} usuario={userEditAndDelete} />
+>>>>>>> 9d7c33545b38bc8a1bc5083fd5ba14a1d246ada6
       </CustomModal>
     </div>
   );

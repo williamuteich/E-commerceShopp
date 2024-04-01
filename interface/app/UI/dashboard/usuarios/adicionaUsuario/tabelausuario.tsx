@@ -71,6 +71,7 @@ const TabelaUsuarioAdicionar = ({ handleSubmit, formData, cargoSelecionado, setC
                         <label>Celular</label>
                     </div>
                     <div className={styles.inputWrapper}>
+<<<<<<< HEAD
                         <select
                             name='cargo'
                             id='cargo'
@@ -87,6 +88,25 @@ const TabelaUsuarioAdicionar = ({ handleSubmit, formData, cargoSelecionado, setC
                                 </option>
                             ))}
                         </select>
+=======
+                    <select
+                        name='cargo'
+                        id='cargo'
+                        value={cargoSelecionado}
+                        onChange={(e) => setCargoSelecionado(e.target.value)}
+                    >
+                        <option value="">Selecionar Cargo</option>
+                        {permissoes.map(permissao => (
+                            <option
+                                key={permissao.id}
+                                value={permissao.id}
+                            >
+                                {permissao.nome}
+                            </option>
+                        ))}
+                    </select>
+
+>>>>>>> 9d7c33545b38bc8a1bc5083fd5ba14a1d246ada6
                         <label>Cargo</label>
                     </div>
                     <div className={styles.inputWrapper}>
