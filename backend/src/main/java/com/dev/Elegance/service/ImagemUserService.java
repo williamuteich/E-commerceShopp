@@ -36,7 +36,7 @@ public class ImagemUserService {
             if (!file.isEmpty()) {
                 byte[] bytes = file.getBytes();
                 String nomeImagem = pessoa.getId() + "_" + file.getOriginalFilename();
-                Path caminho = Paths.get("C:/Ecommerce-Shop/E-commerceShopp/interface/imagens/" + nomeImagem);
+                Path caminho = Paths.get("C:/Ecommerce-Shop/E-commerceShopp/interface/public/" + nomeImagem);
                 Files.write(caminho, bytes);
                 objeto.setImagemUser(nomeImagem);
                 objeto.setPessoa(pessoa);
